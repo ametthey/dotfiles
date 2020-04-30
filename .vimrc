@@ -21,6 +21,7 @@ set noswapfile
 set incsearch
 set splitbelow
 set splitright
+set textwidth=80
 execute pathogen#infect()
 filetype plugin indent on
 let g:airline_solarized_bg='dark' " permet d'avoir les couleurs solarized pour la barre d'informations du bas (airline)
