@@ -31,22 +31,33 @@ colorscheme solarized8
 
 " ------------------------ VIM PLUG ------------------------ "
 call plug#begin('~/.vim/plugged')
+    " Color Hexadecimal CSS
     Plug 'ap/vim-css-color'
-    Plug 'cohama/lexima.vim'
-    " Taboo : for renaming tag (and other)
-    Plug 'gcmt/taboo.vim'
-    " ctrlP : fuzzy awesome search
-    Plug 'kien/ctrlp.vim'
-    Plug 'mattn/emmet-vim'
-    Plug 'mbbill/undotree'
-    Plug 'scrooloose/nerdtree'
-    Plug 'sheerun/vim-polyglot'
-    Plug 'terryma/vim-multiple-cursors'
-    Plug 'tomtom/tcomment_vim'
+    " Git Wrapper
     Plug 'tpope/vim-fugitive'
-    Plug 'tpope/vim-surround'
-    Plug 'valloric/youcompleteme'
+    " Fuzzy Search
+    Plug 'kien/ctrlp.vim'
+    " Tree File
+    Plug 'scrooloose/nerdtree'
+    " Status Bar
     Plug 'vim-airline/vim-airline'
+    " Surround Tag
+    Plug 'tpope/vim-surround'
+    " Easy Comment
+    Plug 'tomtom/tcomment_vim'
+    " Easy Tab Rename
+    Plug 'gcmt/taboo.vim'
+    " Autoclose Parentheses
+    Plug 'cohama/lexima.vim'
+    " Emmet Vim
+    Plug 'mattn/emmet-vim'
+    " Php autocomplete
+    Plug 'shawncplus/phpcomplete.vim'
+    " The ultimate snippets solution for VIM
+    Plug 'sirver/ultisnips'
+    " Coc-vim
+    Plug 'neoclide/coc.nvim', { 'branch': 'release' }
+
 call plug#end()
 
 
@@ -61,6 +72,9 @@ nnoremap <leader>s :set hlsearch<cr>
 nnoremap <leader>q :vertical terminal<cr>
 " Save vimrc, reload it and run PlugInsall
 nnoremap <leader>r :w<cr>:source $MYVIMRC<cr>:PlugInstall<cr>
+" Save vimrc, reload it run PlugClean after deleting the line with the
+" correspondant plug
+nnoremap <leader>s :w<cr>:source $MYVIMRC<cr>:PlugClean<cr>
 " Save vimrc and reload it
 nnoremap <leader>d :w<cr>:source $MYVIMRC<cr>
 " Save current file and open CtrlP
@@ -89,9 +103,15 @@ nmap <leader>n :NERDTree<cr>
 
 " ------------------------ ctrlP ------------------------ "
 let g:ctrlp_custom_ignore = 'node_modules'
-" let g:ctrlp_custom_ignore = '\v[\/]\.(node_modules|packaged)$'
 let g:ctrlp_working_path_mode = 0
 nmap <leader>, :CtrlPTag<cr>
+
+" ------------------------ Git Fugitive  ------------------------ "
+nnoremap <leader>g :Git <cr>
+nnoremap <leader>gaa :Git add .<cr>
+nnoremap <leader>gc :Git commit -m "
+nnoremap <leader>gs :Git status<cr>
+nnoremap <leader>gp :Git push<cr>
 
 " ------------------------ YouCompleteMe ------------------------ "
 " Start autocompletion after 4 chars
