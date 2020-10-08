@@ -4,6 +4,7 @@ set noerrorbells
 set nocompatible
 set nu
 set background=dark
+" set list
 set cursorline
 set relativenumber
 set termguicolors
@@ -27,6 +28,7 @@ execute pathogen#infect()
 filetype plugin indent on
 let g:airline_solarized_bg='dark' " permet d'avoir les couleurs solarized pour la barre d'informations du bas (airline)
 colorscheme solarized8
+
 
 
 " ------------------------ VIM PLUG ------------------------ "
@@ -96,6 +98,14 @@ autocmd BufWritePre * %s/\s\+$//e
 nnoremap <leader>td :TabooRename dev<cr>
 " rename current tab with serve
 nnoremap <leader>ts :TabooRename serve<cr>
+
+" ------------------------ Moving Lines ------------------------ "
+nnoremap <c-j> :m .+1<CR>==
+nnoremap <c-k> :m .-2<CR>==
+inoremap <c-j> <Esc>:m .+1<CR>==gi
+inoremap <c-k> <Esc>:m .-2<CR>==gi
+vnoremap <c-j> :m '>+1<CR>gv=gv
+vnoremap <c-k> :m '<-2<CR>gv=gv
 
 
 " ------------------------ NERDTREE ------------------------ "
