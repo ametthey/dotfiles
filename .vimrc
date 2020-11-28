@@ -17,6 +17,7 @@ set matchtime=3
 set tabstop=4
 set softtabstop=4
 set shiftwidth=4
+set hlsearch
 set expandtab
 set nobackup
 set noswapfile
@@ -47,8 +48,6 @@ call plug#begin('~/.vim/plugged')
     Plug 'tpope/vim-fugitive'
     " Fuzzy Search
     Plug 'kien/ctrlp.vim'
-    "   A command line fuzzy finder
-    " Plug 'junegunn/fzf'
     " Tree File
     Plug 'scrooloose/nerdtree'
     " Status Bar
@@ -60,31 +59,35 @@ call plug#begin('~/.vim/plugged')
     " Easy Tab Rename
     Plug 'gcmt/taboo.vim'
     " Autoclose Parentheses
-    Plug 'cohama/lexima.vim'
-    " Emmet Vim
-    Plug 'mattn/emmet-vim'
-    " Php autocomplete
-    Plug 'shawncplus/phpcomplete.vim'
-    " The ultimate snippets solution for VIM
-    " Plug 'sirver/ultisnips'
-    " Coc-vim
-    " Plug 'neoclide/coc.nvim', { 'branch': 'release' }
+   " Emmet Vim
+   Plug 'mattn/emmet-vim'
+   " Close parentheses
+   Plug 'cohama/lexima.vim'
+   " FZF
+   Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+   Plug 'junegunn/fzf.vim'
 
-    " install zfz
-    Plug 'junegunn/fzf.vim'
-    Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+   "indentLine
+   Plug 'yggdroot/indentline'
+
 call plug#end()
 
 
 " ------------------------ CUSTOM KEYS ------------------------ "
+" Available letters
+" a b e i k l m o t u w x y z
+
+
 
 let mapleader = ","
 :imap jj <Esc>
 nnoremap <leader>h :set filetype=html<cr>
 nnoremap <leader>p :set filetype=php<cr>
-nnoremap <leader>s :set hlsearch<cr>
+" nnoremap <leader>s :set hlsearch<cr>
 " open terminal in a vertical split
 nnoremap <leader>q :vertical terminal<cr><c-w>T<c-w>:TabooRename serve<cr>
+" open shell and gbp
+nnoremap <leader>t :shell<cr>gbp<cr>
 " Save vimrc, reload it and run PlugInsall
 nnoremap <leader>r :w<cr>:source $MYVIMRC<cr>:PlugInstall<cr>
 " Save vimrc, reload it run PlugClean after deleting the line with the
@@ -92,6 +95,8 @@ nnoremap <leader>r :w<cr>:source $MYVIMRC<cr>:PlugInstall<cr>
 nnoremap <leader>s :w<cr>:source $MYVIMRC<cr>:PlugClean<cr>
 " Save vimrc and reload it
 nnoremap <leader>d :w<cr>:source $MYVIMRC<cr>
+" Open vimrc from anywhere
+nnoremap <leader>v :e $MYVIMRC<cr>
 " Move to the bottom window
 nnoremap <C-J> <C-W><C-J>
 " Move to the top window
@@ -100,8 +105,6 @@ nnoremap <C-K> <C-W><C-K>
 nnoremap <C-L> <C-W><C-L>
 " Move to the right window
 nnoremap <C-H> <C-W><C-H>
-" Pre-populate a split command with the current directory
-nmap <leader>v :vnew <C-r>=escape(expand("%:p:h"), ' ') . '/'<cr>
 " on file save, remove all unwanted whitespace
 " https://vim.fandom.com/wiki/Remove_unwanted_spaces
 autocmd BufWritePre * %s/\s\+$//e
@@ -109,6 +112,11 @@ autocmd BufWritePre * %s/\s\+$//e
 nnoremap <leader>td :TabooRename dev<cr>
 " rename current tab with serve
 nnoremap <leader>ts :TabooRename serve<cr>
+" activate hlsearch
+nnoremap <leader>l :set nohlsearch<cr>
+nnoremap <leader>j :set hlsearch<cr>
+
+nnoremap <leader>f ::Files!<cr>
 
 " ------------------------ Moving Lines ------------------------ "
 nnoremap <c-j> :m .+1<CR>==
@@ -128,6 +136,7 @@ let g:ctrlp_custom_ignore = {
     \ 'dir': 'node_modules\|packaged\|dist',
     \ }
 nmap <leader>, :CtrlPTag<cr>
+nmap <leader>c :CtrlP .<cr>
 
 " ------------------------ Git Fugitive  ------------------------ "
 nnoremap <leader>g :Git <cr>
