@@ -25,6 +25,7 @@ set incsearch
 set splitbelow
 set splitright
 set history=1000
+set mouse=a
 
 " Folding
 set foldmethod=indent
@@ -33,6 +34,9 @@ set nofoldenable
 set foldlevel=2
 " start unfolded
 set foldlevelstart=99
+
+" activate the matching parenthesis to html tag
+runtime macros/matchit.vim
 
 
 execute pathogen#infect()
@@ -66,6 +70,8 @@ call plug#begin('~/.vim/plugged')
    " FZF
    Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
    Plug 'junegunn/fzf.vim'
+   " Vim multi cursors
+   Plug 'terryma/vim-multiple-cursors'
 
    "indentLine
    Plug 'yggdroot/indentline'
@@ -115,8 +121,9 @@ nnoremap <leader>ts :TabooRename serve<cr>
 " activate hlsearch
 nnoremap <leader>l :set nohlsearch<cr>
 nnoremap <leader>j :set hlsearch<cr>
-
+" fzf
 nnoremap <leader>f ::Files!<cr>
+" let g:fzf_layout = { 'window': 'enew' }
 
 " ------------------------ Moving Lines ------------------------ "
 nnoremap <c-j> :m .+1<CR>==
@@ -141,10 +148,15 @@ nmap <leader>c :CtrlP .<cr>
 " ------------------------ Git Fugitive  ------------------------ "
 nnoremap <leader>g :Git <cr>
 nnoremap <leader>gaa :Git add .<cr>
-nnoremap <leader>gc :Git commit -m "
+nnoremap <leader>gc :Git commit -m
 nnoremap <leader>gs :Git status<cr>
 nnoremap <leader>gp :Git push<cr>
 
 " ------------------------ vim javascript  ------------------------ "
 let g:javascript_plugin_jsdoc = 1
 
+
+" ------------------------ abbreviations  ------------------------ "
+
+iabbrev fn function
+iabbrev teh the
